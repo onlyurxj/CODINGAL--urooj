@@ -37,14 +37,14 @@ while True:
                 else:
                     color=Fore.YELLOW 
                     emoji =" "
-                print (f"{i}.{color}{emoji} {text}"f"Polarity:{polarity: 2f},{sentiment_type}")
+                print (f"{i}.{color}{emoji} {text}"f"Polarity:{polarity:.2f},{sentiment_type}")
         continue
     polarity=TextBlob(user_input).sentiment.polarity 
     if polarity > 0.25:
         sentiment_type = "Positive"
         color=Fore.GREEN
         emoji= " "
-    elif  polarity < 0.25:
+    elif  polarity < 0:
         sentiment_type = "Neagtive"
         color=Fore.RED
         emoji= " "
@@ -52,8 +52,8 @@ while True:
         sentiment_type = "neutral"
         color=Fore.YELLOW
         emoji=" "
-    conversation_history.append(user_input,polarity,sentiment_type)
-    print(f"{color}{emoji} {sentiment_type} SENTIMENT DETECTED"f"Polarity: {polarity:2f}")
+    conversation_history.append((user_input,polarity,sentiment_type))
+    print(f"{color}{emoji} {sentiment_type} SENTIMENT DETECTED"f"Polarity: {polarity:.2f}")
 
 
 

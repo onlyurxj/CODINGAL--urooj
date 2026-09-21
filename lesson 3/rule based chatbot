@@ -1,0 +1,7 @@
+import random 
+from  colorama import Fore ,init
+init (autoreset=True )
+destinations ={ "Beaches": [" Maldives","Hawaii", "Las Vegas"],
+               "Mountains": ["K2","Jabel e hafeet","Jabel e jais"],
+               "Cities": ["Tokyo","Islamabad","Dubai"]}
+jokes=["why don't programmers like nature?- TOO MANY BUGS","why did the computer go to the doctor?- BECAUSE IT HAD A VIRUS","why do travellers always feel warm?-BECAUSE OF ALL THEIR HOTSPOTS!!"]
