@@ -1,7 +1,46 @@
 import random 
 from  colorama import Fore ,init
 init (autoreset=True )
-destinations ={ "Beaches": [" Maldives","Hawaii", "Las Vegas"],
-               "Mountains": ["K2","Jabel e hafeet","Jabel e jais"],
-               "Cities": ["Tokyo","Islamabad","Dubai"]}
+destinations ={ "beaches": [" Maldives","Hawaii", "Las Vegas"],
+               "mountains": ["K2","Jabel e hafeet","Jabel e jais"],
+               "cities": ["Tokyo","Islamabad","Dubai"]}
 jokes=["why don't programmers like nature?- TOO MANY BUGS","why did the computer go to the doctor?- BECAUSE IT HAD A VIRUS","why do travellers always feel warm?-BECAUSE OF ALL THEIR HOTSPOTS!!"]
+def recommend (): 
+    choice= input("CHOOSE YOUR DESTINATION: BEACHES - MOUNTAINS - CITIES").lower()
+    if choice in destinations: 
+        place=random.choice(destinations[choice])
+        print(f"How about {place}")
+    else:
+        print("sorry I don't know that! try again")
+def packing():
+    place=input("Where are you going?")
+    day=input("How many days are you going for?")
+    print(f"Packing tips for {day} days in place {place}")
+    print("Pack warm clothes!")
+    print("Dont forget your chargers")
+    print("Take a camera!!!")
+def chat():
+    name=input("ENTER YOUR NAME PLEASE")
+    print(f"HELLO {name}, I am your travel bot!")
+    while True:
+        command=input("HOW CAN WE HELP YOU?").lower()
+        if "recommend" in command or "suggest" in command:
+            recommend()
+        elif "pack" in command:
+            packing()
+        elif "joke" in command or "funny" in command:
+            print(random.choice(jokes))
+        elif "help" in command:
+            print("Recommend: packing - jokes - exit")
+        elif "bye" in command or "exit" in command:
+            print(f"GOODBYE {name}")
+            break 
+        else:
+            print("CAN YOU PLEASE REPHRASE")
+
+chat()
+      
+
+          
+
+
