@@ -15,8 +15,8 @@ def display_image(title,image):
 def interactive_edge_detection(image_path):
     image=cv2.imread(image_path)
     if image is None:
-        print("IMAGE NOT FOUND.")
-        return 
+            print("IMAGE NOT FOUND.")
+
 
     gray_image=(cv2.cvtColor(image,cv2.COLOR_BGR2GRAY))
     display_image("Orignal gray scale image",gray_image)
@@ -30,7 +30,7 @@ def interactive_edge_detection(image_path):
     print("6. Exit") 
 
     while True:
-        choice=input("Please select a number from 1-6. ")
+        choice=int(input("Please select a number from 1-6. "))
         if choice ==1:
             sobel_x=cv2.Sobel(gray_image,cv2.CV_64F,1,0,ksize=3)
             sobel_y=cv2.Sobel(gray_image,cv2.CV_64F,0,1,ksize=3)
@@ -66,7 +66,7 @@ def interactive_edge_detection(image_path):
         else:
             print("Invalid input- ENTER NUMBER 1-6")
 
-interactive_edge_detection('example.jpg')
+interactive_edge_detection(r'C:\Users\Hp\OneDrive\Desktop\CODINGAL- urooj\Edge detection\Interactive Edge Detection & Filtering\example.jpg')
 
         
             
