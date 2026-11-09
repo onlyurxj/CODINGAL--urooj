@@ -4,7 +4,7 @@ print(cv2.__version__)
 print(hasattr(cv2,"CascadeClassifier"))
 face_cascade=cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 cap=cv2.VideoCapture(0)
-if not cap.isOpen():
+if not cap.isOpened():
     print("ERROR.COULD NOT OPEN CAMERA ")
     exit ()
 
@@ -15,11 +15,13 @@ while True:
         break
 
     gray=cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
-    faces=face_cascade.detectMultiScale(gray.scaleFactor == 1.1,minNeighbors=5,minSize=(30,30))
+    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
     for (x,y,w,h) in faces:
         cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),3)
-        cv2.imshow('face detection-press q to exit',frame)
-        if cv2.waitKey(1) & 0xFF== ord ('q'):
+        font=cv2.FONT_HERSHEY_SIMPLEX
+        cv2.putText(frame,f"people count: {len(faces)}",(10,30),font,1,(255,0,0),2,cv2.LINE_AA)
+        cv2.imshow('face tracking & counting -press q to exit',frame)
+        if cv2.waitKey(1) & 0xFF== ord ('e'):
             break
 
 cap.release()
