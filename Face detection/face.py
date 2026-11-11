@@ -21,8 +21,8 @@ while True:
         font=cv2.FONT_HERSHEY_SIMPLEX
         cv2.putText(frame,f"people count: {len(faces)}",(10,30),font,1,(255,0,0),2,cv2.LINE_AA)
         cv2.imshow('face tracking & counting -press q to exit',frame)
-        if cv2.waitKey(1) & 0xFF== ord ('e'):
-            break
+    if cv2.waitKey(1) & 0xFF== ord ('q'):
+        break
 
 cap.release()
 cv2.destroyAllWindows()
