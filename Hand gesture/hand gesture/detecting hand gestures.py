@@ -1,7 +1,6 @@
 import cv2
 import mediapipe as mp
 
-# ---------- 1) Setup MediaPipe ----------
 mp_hands = mp.solutions.hands
 mp_draw = mp.solutions.drawing_utils
 
@@ -45,3 +44,31 @@ while True:
     frame_rgb=cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
     results=hands.process(frame_rgb)
     gesture="no hand detected"
+
+    if results.multi_hand_landmarks and results.multi_handedness:
+        for idx, hand_landmarks in enumerate (results.multi_hand_landmarks):
+            hand_label=results.multi_handedness[idx].classification[0].label
+            gesture=detect_gesture(hand_landmarks)
+            mp_draw.draw_landmarks(frame,hand_landmarks,mp_hands.HAND_CONNECTIONS)
+            fingertip_ids=[4,8,12,16,20]
+            for tip_id in fingertip_ids:
+                lm=hand_landmarks.landmark[tip_id]
+                x,y=int(lm.x*w),int(lm.y*h)
+                cv2.circle(frame,(x,y),10,(255,0,255),cv2.FILLED)
+                cv2.putText(frame, str(tip_id), (x - 5, y - 15),
+                cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 0), 2)
+
+            wrist=hand_landmarks.landmark[0]
+            wrist_x,wrist_y=int(wrist.x*w),int(wrist.y*h)
+            cv2.putText(frame, f"{hand_label} Hand", (wrist_x - 40, wrist_y + 30),cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
+
+    status_color=(0,255,0)if gesture in ["open","closed fist"] else (1,165,255)
+    cv2.putText(frame, f"Gesture: {gesture}", (10, 30),cv2.FONT_HERSHEY_SIMPLEX, 1, status_color, 2)
+
+    cv2.imshow ("hand gesture recongnition",frame)
+
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+cap.release()
+cv2.destroyAllWindows()
